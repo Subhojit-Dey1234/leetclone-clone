@@ -47,13 +47,13 @@ public class CodeExecutionService {
     @PostConstruct
     public void init() throws InterruptedException {
         log.info("Pulling docker images.");
-//        dockerClient.pullImageCmd(Language.PYTHON.getDockerImage()).exec(new PullImageResultCallback()).awaitCompletion();
+        dockerClient.pullImageCmd(Language.PYTHON.getDockerImage()).exec(new PullImageResultCallback()).awaitCompletion();
         log.info("Docker image {} successfully pulled.", Language.PYTHON.getDockerImage());
 
-//        dockerClient.pullImageCmd(Language.JAVA.getDockerImage()).exec(new PullImageResultCallback()).awaitCompletion();
+        dockerClient.pullImageCmd(Language.JAVA.getDockerImage()).exec(new PullImageResultCallback()).awaitCompletion();
         log.info("Docker image {} successfully pulled.", Language.JAVA.getDockerImage());
 
-//        dockerClient.pullImageCmd(Language.JAVASCRIPT.getDockerImage()).exec(new PullImageResultCallback()).awaitCompletion();
+        dockerClient.pullImageCmd(Language.JAVASCRIPT.getDockerImage()).exec(new PullImageResultCallback()).awaitCompletion();
         log.info("Docker image {} successfully pulled.", Language.JAVASCRIPT.getDockerImage());
     }
 
@@ -68,8 +68,6 @@ public class CodeExecutionService {
         HostConfig hostConfig = HostConfig.newHostConfig().withBinds(
                 new Bind(FOLDER_PATH + SLASH + uniqueId, volume)
         );
-
-        System.out.println();
 
         CreateContainerResponse container = dockerClient
                 .createContainerCmd(imageName)

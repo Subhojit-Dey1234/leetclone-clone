@@ -11,7 +11,7 @@ CREATE TABLE testcases
 );
 
 
-INSERT INTO testcases (id, explanation, input_params, expected_output, execution_code, problem_id)
+INSERT INTO testcases (id, explanation, input_params, expected_output, problem_id)
 VALUES
 (1, 'Because nums[0] + nums[1] == 9, we return [0, 1].', '[2,7,11,15]\n9','[0,1]', 1),
 (2, '', '[3,2,4]\n6','[1,2]', 1),
