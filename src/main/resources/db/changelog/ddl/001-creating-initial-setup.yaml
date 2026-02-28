@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-problem
+      author: Subhojit
+      changes:
+        - sql: |
+            CREATE TABLE public.problem
+            (
+              id         BIGSERIAL PRIMARY KEY,
+              fn         VARCHAR(255), -- The function name or description
+              basic_code TEXT,         -- The basic code or solution
+              header     VARCHAR(255),
+              metadata   TEXT
+            );
+
+  - changeSet:
+      id: 002-create-code-snippets
+      author: Subhojit
+      changes:
+        - sql: |
+            CREATE TABLE public.code_snippets
+              (
+                id       BIGSERIAL PRIMARY KEY,
+                lang     VARCHAR(255),
+                code     VARCHAR(255),
+                lang_slug VARCHAR(255),
+                execution_code  TEXT,
+                problem_id  BIGINT,
+                CONSTRAINT fk_code_snippet
+                FOREIGN KEY (problem_id) REFERENCES problem (id)
+                ON DELETE CASCADE
+            );
+
+  - changeSet:
+      id: 003-create-testcases
+      author: Subhojit
+      changes:
+        - sql: |
+            CREATE TABLE public.testcases
+            (
+              id              BIGSERIAL PRIMARY KEY,
+              explanation     TEXT,         -- Detailed explanation of the test case
+              input_params    TEXT,         -- Input parameters for the test case
+              expected_output TEXT,         -- The expected output for the test case
+              problem_id      BIGINT,       -- Foreign key reference to the Problem table
+              CONSTRAINT fk_problem_testcases
+              FOREIGN KEY (problem_id) REFERENCES problem (id)
+              ON DELETE CASCADE
+            );
+
+  - changeSet:
+      id: 004-create-users
+      author: Subhojit
+      changes:
+        - sql: |
+            create table public.users
+            (
+              id         BIGSERIAL    PRIMARY KEY,
+              age        int          not null,
+              first_name varchar(255) not null,
+              last_name  varchar(255),
+              email      varchar(255) not null,
+              password   varchar(800) not null
+            );
