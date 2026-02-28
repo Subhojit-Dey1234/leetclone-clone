@@ -1,10 +1,8 @@
 package leetcode.clone.leetcode.service;
 
-import leetcode.clone.leetcode.dao.UserDao;
 import leetcode.clone.leetcode.repository.UserRepository;
 import leetcode.clone.leetcode.response.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
