@@ -1,12 +1,10 @@
 FROM node:20-alpine
 
 # Create non-root user (Alpine syntax)
-RUN addgroup -S coderunner && \
-    adduser -S coderunner -G coderunner
-
-# Create workspace
-RUN mkdir -p /workspace && chown -R coderunner:coderunner /workspace
-WORKDIR /workspace
+RUN groupadd -r coderunner && \
+    useradd -r -g coderunner -m coderunner && \
+    mkdir -p /workspace && \
+    chown -R coderunner:coderunner /workspace
 
 USER coderunner
 

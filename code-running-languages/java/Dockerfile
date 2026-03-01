@@ -1,14 +1,12 @@
 FROM eclipse-temurin:17-jre
 
-# Create non-root user
-RUN addgroup -g 1000 coderunner && \
-    adduser -D -u 1000 -G coderunner coderunner
+# Create non-root system user safely
+RUN groupadd -r coderunner && \
+    useradd -r -g coderunner -m coderunner && \
+    mkdir -p /workspace && \
+    chown -R coderunner:coderunner /workspace
 
-# Create workspace
-RUN mkdir -p /workspace && chown coderunner:coderunner /workspace
 WORKDIR /workspace
-
 USER coderunner
 
-# Keep container running
 CMD ["tail", "-f", "/dev/null"]

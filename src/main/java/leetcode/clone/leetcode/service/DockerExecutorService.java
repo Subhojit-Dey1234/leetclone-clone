@@ -84,6 +84,8 @@ public class DockerExecutorService {
             result.setPassed(false);
             result.setError(e.getMessage());
         }
+
+        result.setExecutionTimeMs(System.currentTimeMillis() - startTime);
         return result;
     }
 
@@ -120,8 +122,8 @@ public class DockerExecutorService {
                 return prepareCppCode(code, input);
             case "javascript":
                 return prepareJavaScriptCode(code, input);
-            case "go":
-                return prepareGoCode(code, input);
+//            case "go":
+//                return prepareGoCode(code, input);
             default:
                 throw new IllegalArgumentException("Unsupported language: " + language);
         }

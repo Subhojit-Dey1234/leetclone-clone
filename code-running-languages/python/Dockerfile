@@ -1,18 +1,15 @@
 FROM python:3.11-alpine
 
-# Create non-root user for security
-RUN addgroup -g 1000 coderunner && \
-    adduser -D -u 1000 -G coderunner coderunner
+# Create non-root user (Alpine syntax)
+RUN addgroup -S coderunner && \
+    adduser -S coderunner -G coderunner && \
+    mkdir -p /workspace && \
+    chown -R coderunner:coderunner /workspace
 
-# Create workspace directory
-RUN mkdir -p /workspace && chown coderunner:coderunner /workspace
-WORKDIR /workspace
-
-# Install any common libraries you might need
+# Install common libraries
 RUN pip install --no-cache-dir numpy
 
-# Switch to non-root user
+WORKDIR /workspace
 USER coderunner
 
-# Keep container running
 CMD ["tail", "-f", "/dev/null"]

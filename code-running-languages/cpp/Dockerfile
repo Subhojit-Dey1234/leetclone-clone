@@ -1,12 +1,10 @@
 FROM gcc:13
 
 # Create non-root user
-RUN addgroup -g 1000 coderunner && \
-    adduser -D -u 1000 -G coderunner coderunner
-
-# Create workspace
-RUN mkdir -p /workspace && chown coderunner:coderunner /workspace
-WORKDIR /workspace
+RUN groupadd -r coderunner && \
+    useradd -r -g coderunner -m coderunner && \
+    mkdir -p /workspace && \
+    chown -R coderunner:coderunner /workspace
 
 USER coderunner
 
