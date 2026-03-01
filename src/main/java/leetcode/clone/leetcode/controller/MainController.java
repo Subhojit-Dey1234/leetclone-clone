@@ -17,7 +17,6 @@ import java.util.Optional;
 public class MainController {
 
     private final UserService userService;
-
     private final SubmissionService submissionService;
 
     @GetMapping

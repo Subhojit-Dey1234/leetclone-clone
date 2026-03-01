@@ -1,0 +1,110 @@
+version: '3.8'
+
+services:
+  python-executor:
+    platform: "linux/amd64"
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    container_name: python-executor
+    restart: unless-stopped
+    networks:
+      - executor-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /workspace
+
+  java-executor:
+    platform: "linux/amd64"
+    build:
+      context: ./java
+      dockerfile: Dockerfile
+    container_name: java-executor
+    restart: unless-stopped
+    networks:
+      - executor-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 768M
+        reservations:
+          cpus: '0.5'
+          memory: 384M
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /workspace
+
+  cpp-executor:
+    platform: "linux/amd64"
+    build:
+      context: ./cpp
+      dockerfile: Dockerfile
+    container_name: cpp-executor
+    restart: unless-stopped
+    networks:
+      - executor-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /workspace
+
+  javascript-executor:
+    platform: "linux/amd64"
+    build:
+      context: ./javascript
+      dockerfile: Dockerfile
+    container_name: javascript-executor
+    restart: unless-stopped
+    networks:
+      - executor-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /workspace
+
+networks:
+  executor-network:
+    driver: bridge
