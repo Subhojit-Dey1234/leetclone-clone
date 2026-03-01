@@ -158,37 +158,22 @@ public class DockerExecutorService {
         return code.replace("{{INPUT}}", input);
     }
 
-    /**
-     * Prepare Java code with input
-     */
     private String prepareJavaCode(String code, String input) {
         return code.replace("{{INPUT}}", input);
     }
 
-    /**
-     * Prepare C++ code with input
-     */
     private String prepareCppCode(String code, String input) {
         return code.replace("{{INPUT}}", input);
     }
 
-    /**
-     * Prepare JavaScript code with input
-     */
     private String prepareJavaScriptCode(String code, String input) {
         return code.replace("{{INPUT}}", input);
     }
 
-    /**
-     * Prepare Go code with input
-     */
     private String prepareGoCode(String code, String input) {
         return code.replace("{{INPUT}}", input);
     }
 
-    /**
-     * Escape code for shell execution
-     */
     private String escapeCode(String code) {
         return code.replace("'", "'\\''");
     }
