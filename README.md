@@ -10,7 +10,6 @@ This document contains ready-to-use JSON payloads for testing the code executor 
 2. [Java Examples](#java-examples)
 3. [C++ Examples](#cpp-examples)
 4. [JavaScript Examples](#javascript-examples)
-5. [Go Examples](#go-examples)
 6. [Data Structures Examples](#data-structures-examples)
 7. [How to Use](#how-to-use)
 
@@ -388,70 +387,6 @@ This document contains ready-to-use JSON payloads for testing the code executor 
 
 ---
 
-## Go Examples
-
-### 1. Is Prime Number
-
-```json
-{
-  "language": "go",
-  "code": "package main\n\nimport (\n    \"fmt\"\n    \"strconv\"\n    \"math\"\n)\n\nfunc isPrime(n int) bool {\n    if n <= 1 {\n        return false\n    }\n    if n == 2 {\n        return true\n    }\n    if n%2 == 0 {\n        return false\n    }\n    sqrt := int(math.Sqrt(float64(n)))\n    for i := 3; i <= sqrt; i += 2 {\n        if n%i == 0 {\n            return false\n        }\n    }\n    return true\n}\n\nfunc main() {\n    input := \"{{INPUT}}\"\n    n, _ := strconv.Atoi(input)\n    result := isPrime(n)\n    fmt.Println(result)\n}",
-  "testCases": [
-    {
-      "input": "17",
-      "expectedOutput": "true"
-    },
-    {
-      "input": "20",
-      "expectedOutput": "false"
-    }
-  ],
-  "timeoutSeconds": 5
-}
-```
-
-### 2. Factorial
-
-```json
-{
-  "language": "go",
-  "code": "package main\n\nimport (\n    \"fmt\"\n    \"strconv\"\n)\n\nfunc factorial(n int) int64 {\n    if n <= 1 {\n        return 1\n    }\n    var result int64 = 1\n    for i := 2; i <= n; i++ {\n        result *= int64(i)\n    }\n    return result\n}\n\nfunc main() {\n    input := \"{{INPUT}}\"\n    n, _ := strconv.Atoi(input)\n    result := factorial(n)\n    fmt.Println(result)\n}",
-  "testCases": [
-    {
-      "input": "5",
-      "expectedOutput": "120"
-    },
-    {
-      "input": "10",
-      "expectedOutput": "3628800"
-    }
-  ],
-  "timeoutSeconds": 5
-}
-```
-
-### 3. Sum of Digits
-
-```json
-{
-  "language": "go",
-  "code": "package main\n\nimport (\n    \"fmt\"\n    \"strconv\"\n)\n\nfunc sumOfDigits(n int) int {\n    sum := 0\n    for n > 0 {\n        sum += n % 10\n        n /= 10\n    }\n    return sum\n}\n\nfunc main() {\n    input := \"{{INPUT}}\"\n    n, _ := strconv.Atoi(input)\n    result := sumOfDigits(n)\n    fmt.Println(result)\n}",
-  "testCases": [
-    {
-      "input": "1234",
-      "expectedOutput": "10"
-    },
-    {
-      "input": "9876",
-      "expectedOutput": "30"
-    }
-  ],
-  "timeoutSeconds": 5
-}
-```
-
----
-
 ## Data Structures Examples
 
 ### Linked List - Reverse
@@ -659,7 +594,6 @@ This README contains **30+ ready-to-use payloads** across:
 - ✅ Java (4 examples)
 - ✅ C++ (4 examples)
 - ✅ JavaScript (4 examples)
-- ✅ Go (3 examples)
 - ✅ Data Structures (3 examples)
 
 All examples are tested and production-ready! 🚀

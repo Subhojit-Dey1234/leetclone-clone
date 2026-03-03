@@ -28,7 +28,6 @@ public class DockerExecutorService {
         CONTAINER_MAP.put("java", "java-executor");
         CONTAINER_MAP.put("cpp", "cpp-executor");
         CONTAINER_MAP.put("javascript", "javascript-executor");
-        CONTAINER_MAP.put("go", "go-executor");
     }
 
     public ExecutionResponse executeCode(ExecutionRequest request){
@@ -113,20 +112,13 @@ public class DockerExecutorService {
     }
 
     private String prepareCode(String language, String code, String input) {
-        switch (language) {
-            case "python":
-                return preparePythonCode(code, input);
-            case "java":
-                return prepareJavaCode(code, input);
-            case "cpp":
-                return prepareCppCode(code, input);
-            case "javascript":
-                return prepareJavaScriptCode(code, input);
-//            case "go":
-//                return prepareGoCode(code, input);
-            default:
-                throw new IllegalArgumentException("Unsupported language: " + language);
-        }
+        return switch (language) {
+            case "python" -> preparePythonCode(code, input);
+            case "java" -> prepareJavaCode(code, input);
+            case "cpp" -> prepareCppCode(code, input);
+            case "javascript" -> prepareJavaScriptCode(code, input);
+            default -> throw new IllegalArgumentException("Unsupported language: " + language);
+        };
     }
 
     private String[] buildExecutionCommand(String language, String code) {
@@ -146,10 +138,6 @@ public class DockerExecutorService {
                                 "./solution"};
             case "javascript":
                 return new String[]{"node", "-e", code};
-            case "go":
-                return new String[]{"sh", "-c",
-                        "echo '" + escapeCode(code) + "' > solution.go && " +
-                                "go run solution.go"};
             default:
                 throw new IllegalArgumentException("Unsupported language: " + language);
         }
@@ -169,10 +157,6 @@ public class DockerExecutorService {
     }
 
     private String prepareJavaScriptCode(String code, String input) {
-        return code.replace("{{INPUT}}", input);
-    }
-
-    private String prepareGoCode(String code, String input) {
         return code.replace("{{INPUT}}", input);
     }
 
